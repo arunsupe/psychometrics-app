@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Track Your Cognitive Fitness — Psychometrics App</title>
+  <meta name="description" content="Quick, research-inspired tests to track focus, memory, and reaction time. Discover patterns, get insights, and optimize your day. Join the early access list." />
+  <meta name="theme-color" content="#0ea5e9" />
+  <style>
+    :root {
+      --bg: #0b1020;
+      --panel: #0f1730;
+      --text: #e8f0ff;
+      --muted: #a7b7d6;
+      --border: #1e2a48;
+      --accent: #38bdf8;
+      --accent2: #22d3ee;
+      --success: #34d399;
+      --danger: #fb7185;
+      --radius: 18px;
+      --shadow: 0 10px 30px rgba(2,8,23,.45);
+    }
+    @media (prefers-color-scheme: light) {
+      :root{
+        --bg:#f8fafc; --panel:#ffffff; --text:#0b1020; --muted:#475569; --border:#e5e7eb; --shadow:0 10px 30px rgba(2,8,23,.08);
+      }
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;font-family:ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial; color:var(--text); background:
+      radial-gradient(900px 500px at 10% 0%, rgba(56,189,248,.08), transparent 40%),
+      radial-gradient(800px 500px at 100% 10%, rgba(34,211,238,.08), transparent 40%),
+      var(--bg);
+    }
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .container{max-width:1100px;margin:0 auto;padding:24px}
+    header{position:sticky;top:0;z-index:30;backdrop-filter:saturate(140%) blur(8px);background:linear-gradient(180deg, rgba(11,16,32,.8), rgba(11,16,32,.35));border-bottom:1px solid var(--border)}
+    .row{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800}
+    .logo{width:28px;height:28px;border-radius:8px;background:conic-gradient(from 0deg, var(--accent), var(--accent2));box-shadow:inset 0 2px 12px rgba(56,189,248,.5), 0 0 18px rgba(34,211,238,.25)}
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:999px;border:1px solid transparent;background:linear-gradient(135deg, var(--accent), var(--accent2));color:#041018;font-weight:800;box-shadow:var(--shadow);cursor:pointer}
+    .btn.ghost{background:transparent;color:var(--text);border-color:var(--border)}
+    .btn:focus{outline:3px solid rgba(34,211,238,.45)}
+    .hero{padding:64px 0 16px;display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center}
+    @media (max-width: 900px){.hero{grid-template-columns:1fr}}
+    h1{font-size:clamp(28px,5vw,52px);line-height:1.06;margin:14px 0}
+    .lead{color:var(--muted);font-size:clamp(16px,2.2vw,19px);max-width:60ch}
+    .panel{background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,0));border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .hero-card{padding:22px}
+    .bullets{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px}
+    @media (max-width:900px){.bullets{grid-template-columns:1fr}}
+    .bullet{padding:14px;border:1px dashed var(--border);border-radius:14px}
+    .section{padding:42px 0}
+    h2{font-size:clamp(22px,3.5vw,34px);margin:0 0 8px}
+    p{line-height:1.6}
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    @media (max-width: 1000px){.cards{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width: 640px){.cards{grid-template-columns:1fr}}
+    .card{padding:18px}
+    .muted{color:var(--muted)}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+    @media (max-width: 900px){.grid-2{grid-template-columns:1fr}}
+    .list{margin:8px 0 0 0;padding:0 0 0 18px}
+    .cta-block{text-align:center;padding:28px}
+    .input{width:100%;padding:14px 16px;border-radius:12px;border:1px solid var(--border);background:var(--panel);color:var(--text)}
+    .form-row{display:flex;gap:12px;align-items:center}
+    @media (max-width:600px){.form-row{flex-direction:column;align-items:stretch}}
+    .fine{font-size:12px;color:var(--muted)}
+    footer{border-top:1px solid var(--border);padding:28px 0;color:var(--muted)}
+    .inline-badge{display:inline-flex;gap:8px;align-items:center;padding:6px 10px;border:1px solid var(--border);border-radius:999px}
+    .kicker{letter-spacing:.2em;text-transform:uppercase;font-size:12px;color:var(--muted)}
+    .chart{width:100%;height:220px;border-radius:12px;background:linear-gradient(180deg, rgba(56,189,248,.06), transparent 60%);border:1px solid var(--border);position:relative;overflow:hidden}
+    .chart svg{position:absolute;inset:0}
+    .success{color:var(--success)}
+    .error{color:var(--danger)}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container row">
+      <div class="brand"><div class="logo" aria-hidden="true"></div> Psychometrics App</div>
+      <nav class="row" aria-label="primary">
+        <a href="#why">Why track?</a>
+        <a href="#how">How it works</a>
+        <a href="#tests">Tests</a>
+        <a href="#join" class="btn">Join the list</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="container hero">
+      <div>
+        <span class="inline-badge" aria-label="Research-inspired">🧠 Research‑inspired</span>
+        <h1>Understand your mind better — track your cognitive fitness over time.</h1>
+        <p class="lead">Short, research‑inspired checks for <strong>focus</strong>, <strong>memory</strong>, and <strong>reaction time</strong>. Learn how sleep, stress, and time of day affect you — then use that insight to plan your day.</p>
+        <div class="bullets">
+          <div class="bullet">📊 <strong>See patterns</strong><br><span class="muted">Trends across days and weeks reveal what boosts or drains performance.</span></div>
+          <div class="bullet">🔎 <strong>Actionable</strong><br><span class="muted">Make data‑backed choices about when to do deep work or rest.</span></div>
+          <div class="bullet">🔒 <strong>Privacy‑first</strong><br><span class="muted">You control your data. Exports and deletion by design.</span></div>
+        </div>
+        <p style="margin-top:18px">
+          <a href="#join" class="btn">Join the Early Access List</a>
+          <a href="#why" class="btn ghost">Learn more</a>
+        </p>
+      </div>
+      <div class="panel hero-card" aria-hidden="true">
+        <h3 class="kicker">Example insight</h3>
+        <h2 style="margin-top:6px">Sleep & Focus Trend</h2>
+        <p class="muted" style="margin-top:2px">Users often see higher focus scores after 7–8 hours of sleep.</p>
+        <div class="chart" role="img" aria-label="Mock chart showing focus scores trending higher with more sleep">
+          <svg viewBox="0 0 600 220" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="g" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%" stop-color="rgba(56,189,248,0.6)"/>
+                <stop offset="100%" stop-color="rgba(56,189,248,0.0)"/>
+              </linearGradient>
+            </defs>
+            <polyline fill="url(#g)" stroke="none" points="0,180 60,172 120,168 180,150 240,138 300,120 360,110 420,98 480,88 540,78 600,70 600,220 0,220"/>
+            <polyline fill="none" stroke="#38bdf8" stroke-width="3" points="0,180 60,172 120,168 180,150 240,138 300,120 360,110 420,98 480,88 540,78 600,70"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <section id="why" class="section">
+      <div class="container grid-2">
+        <div>
+          <h2>Why track cognitive performance?</h2>
+          <p>Cognitive performance shifts with <strong>sleep</strong>, <strong>stress</strong>, <strong>nutrition</strong>, and <strong>time of day</strong>. By running quick checks and logging lightweight context, you can discover when you’re sharpest and structure your day around it.</p>
+          <div class="cards">
+            <div class="panel card"><strong>Find your peak hours</strong><br><span class="muted">Spot the windows where deep work feels effortless.</span></div>
+            <div class="panel card"><strong>Reduce guesswork</strong><br><span class="muted">Replace hunches with trends you can see.</span></div>
+            <div class="panel card"><strong>Build better habits</strong><br><span class="muted">Use feedback loops to improve sleep and focus.</span></div>
+          </div>
+        </div>
+        <div class="panel card">
+          <h3 class="kicker">What you’ll measure</h3>
+          <ul class="list">
+            <li><strong>Reaction Time</strong> (Psychomotor Vigilance Task)</li>
+            <li><strong>Working Memory</strong> (Digit Span)</li>
+            <li><strong>Selective Attention</strong> (Stroop)</li>
+            <li><strong>Cognitive Flexibility</strong> (Trail Making)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="section" aria-labelledby="how-title">
+      <div class="container">
+        <h2 id="how-title">How it works</h2>
+        <div class="grid-2">
+          <div class="panel card">
+            <ol class="list">
+              <li><strong>Take quick checks</strong> — 30–90 seconds per test.</li>
+              <li><strong>Optionally add context</strong> — sleep hours, caffeine, time of day.</li>
+              <li><strong>See trends</strong> — compare results vs. your context.</li>
+            </ol>
+          </div>
+          <div class="panel card">
+            <h3 class="kicker">Privacy & Data</h3>
+            <ul class="list">
+              <li>🔒 Local‑first philosophy</li>
+              <li>🗑️ One‑click data deletion</li>
+              <li>📤 Portable exports (CSV/JSON)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="join" class="section">
+      <div class="container panel cta-block">
+        <h2>Join the early access list</h2>
+        <p class="muted">Get updates, early invites, and sample insights. No spam — unsubscribe anytime.</p>
+        <form id="signup" class="container" style="max-width:720px" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <div class="form-row">
+            <input class="input" type="text" name="name" placeholder="Your name (optional)" autocomplete="name" />
+            <input class="input" type="email" name="email" placeholder="you@example.com" required autocomplete="email" />
+            <button class="btn" type="submit">Join the list</button>
+          </div>
+          <p class="fine">We’ll only use your email to send updates about this project.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer id="privacy">
+    <div class="container row" style="justify-content:space-between;align-items:flex-start;gap:12px">
+      <div>
+        <div class="brand"><div class="logo" aria-hidden="true"></div> Psychometrics App</div>
+        <p class="fine">© <span id="y"></span> Psychometrics App • Built with a privacy‑first mindset.</p>
+      </div>
+      <div class="fine">Contact: <a href="mailto:hello@example.com">hello@example.com</a></div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+  <style>.visually-hidden {position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap}</style>
+</body>
+</html>

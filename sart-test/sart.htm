@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SART Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        #number {
+            font-size: 15vw;
+            user-select: none;
+            margin-bottom: 20px;
+            height: 30vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            hyphens: auto;
+        }
+
+        #startButton,
+        #downloadButton,
+        #restartButton {
+            font-size: 5vw;
+            padding: 15px 30px;
+            margin: 10px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            width: 80%;
+            max-width: 300px;
+        }
+
+        #buttonContainer {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        table {
+            margin-top: 20px;
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 100%;
+            font-size: 3vw;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+            word-break: break-word;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="number">Press Start to Begin</div>
+    <div id="buttonContainer">
+        <button id="startButton">Start Test</button>
+        <button id="downloadButton" style="display: none;">Download Results</button>
+        <button id="restartButton" style="display: none;">Restart Test</button>
+    </div>
+    <table id="resultsTable" style="display: none;">
+        <thead>
+            <tr>
+                <th>Time (s)</th>
+                <th>Trials</th>
+                <th>3s</th>
+                <th>Correct</th>
+                <th>Errors</th>
+            </tr>
+        </thead>
+        <tbody id="resultsBody">
+        </tbody>
+    </table>
+    <script>
+        // JavaScript remains the same as in the previous version
+    </script>
+</body>
+
+</html>

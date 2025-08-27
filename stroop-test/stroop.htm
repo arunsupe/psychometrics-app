@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stroop Effect Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            margin: 10px 0;
+            word-wrap: break-word;
+        }
+
+        #start-screen, #test-area {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #start-button {
+            font-size: 18px;
+            padding: 15px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            max-width: 100%;
+            box-sizing: border-box;
+            white-space: normal;
+            word-wrap: break-word;
+        }
+
+        #word {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        #buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        button {
+            font-size: 18px;
+            padding: 15px 0;
+            width: 100%;
+            border: none;
+            border-radius: 5px;
+            background-color: #f0f0f0;
+            color: #333;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #e0e0e0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        #download-button {
+            font-size: 18px;
+            padding: 10px 20px;
+            background-color: #0074D9;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 5px;
+            }
+
+            h1 {
+                font-size: 18px;
+            }
+
+            #start-button {
+                font-size: 14px;
+                padding: 10px 15px;
+            }
+
+            #word {
+                font-size: 24px;
+            }
+
+            button {
+                font-size: 14px;
+                padding: 10px 0;
+            }
+
+            table {
+                font-size: 12px;
+            }
+
+            #download-button {
+                font-size: 14px;
+                padding: 8px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Stroop Effect Test</h1>
+    <div id="start-screen">
+        <button id="start-button" onclick="initializeTest()">Press to Start</button>
+        <p>Or press spacebar</p>
+    </div>
+    <div id="test-area" style="display: none;">
+        <p id="word"></p>
+        <div id="buttons">
+            <button onclick="checkAnswer('red')">Red (R)</button>
+            <button onclick="checkAnswer('blue')">Blue (B)</button>
+            <button onclick="checkAnswer('green')">Green (G)</button>
+            <button onclick="checkAnswer('yellow')">Yellow (Y)</button>
+        </div>
+    </div>
+    <div id="results">
+        <h2>Results</h2>
+        <table id="results-table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Score</th>
+                    <th>Congruent (ms)</th>
+                    <th>Incongruent (ms)</th>
+                    <th>Diff (ms)</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <button id="download-button" onclick="downloadCSV()">Download Results as CSV</button>
+    <script>
+        const colors = ['red', 'blue', 'green', 'yellow'];
+        let currentWord, currentColor, startTime, score, totalTrials;
+        let congruentTimes = [];
+        let incongruentTimes = [];
+        let testActive = false;
+
+        function initializeTest() {
+            document.getElementById('start-screen').style.display = 'none';
+            document.getElementById('test-area').style.display = 'block';
+            startTest();
+        }
+
+        function startTest() {
+            score = 0;
+            totalTrials = 0;
+            congruentTimes = [];
+            incongruentTimes = [];
+            testActive = true;
+            nextWord();
+        }
+
+        function nextWord() {
+            currentWord = colors[Math.floor(Math.random() * colors.length)];
+            currentColor = colors[Math.floor(Math.random() * colors.length)];
+            document.getElementById('word').textContent = currentWord.toUpperCase();
+            document.getElementById('word').style.color = currentColor;
+            startTime = Date.now();
+            totalTrials++;
+        }
+
+        function checkAnswer(answer) {
+            if (!testActive) return;
+
+            const endTime = Date.now();
+            const timeTaken = endTime - startTime;
+
+            if (answer === currentColor) {
+                score++;
+                if (currentWord === currentColor) {
+                    congruentTimes.push(timeTaken);
+                } else {
+                    incongruentTimes.push(timeTaken);
+                }
+            }
+
+            if (totalTrials < 20) {
+                nextWord();
+            } else {
+                endTest();
+            }
+        }
+
+        function calculateMedian(arr) {
+            const sorted = arr.slice().sort((a, b) => a - b);
+            const middle = Math.floor(sorted.length / 2);
+            if (sorted.length % 2 === 0) {
+                return (sorted[middle - 1] + sorted[middle]) / 2;
+            }
+            return sorted[middle];
+        }
+
+        function endTest() {
+            testActive = false;
+            const medianTimeCongruent = congruentTimes.length ? calculateMedian(congruentTimes).toFixed(2) : 0;
+            const medianTimeIncongruent = incongruentTimes.length ? calculateMedian(incongruentTimes).toFixed(2) : 0;
+            const difference = (medianTimeIncongruent - medianTimeCongruent).toFixed(2);
+
+            const result = {
+                date: new Date().toLocaleString(),
+                score: score,
+                medianTimeCongruent: medianTimeCongruent,
+                medianTimeIncongruent: medianTimeIncongruent,
+                difference: difference
+            };
+            saveResult(result);
+            displayResults();
+            document.getElementById('start-screen').style.display = 'block';
+            document.getElementById('test-area').style.display = 'none';
+        }
+
+        function saveResult(result) {
+            let results = JSON.parse(localStorage.getItem('stroopResults')) || [];
+            results.push(result);
+            localStorage.setItem('stroopResults', JSON.stringify(results));
+        }
+
+        function displayResults() {
+            const results = JSON.parse(localStorage.getItem('stroopResults')) || [];
+            const tbody = document.querySelector('#results-table tbody');
+            tbody.innerHTML = '';
+            results.forEach(result => {
+                const row = tbody.insertRow();
+                row.insertCell().textContent = result.date;
+                row.insertCell().textContent = result.score;
+                row.insertCell().textContent = result.medianTimeCongruent;
+                row.insertCell().textContent = result.medianTimeIncongruent;
+                row.insertCell().textContent = result.difference;
+            });
+        }
+
+        function downloadCSV() {
+            const results = JSON.parse(localStorage.getItem('stroopResults')) || [];
+            if (results.length === 0) {
+                alert('No results to download.');
+                return;
+            }
+
+            let csvContent = "data:text/csv;charset=utf-8,";
+            csvContent += "Date,Score,Congruent (ms),Incongruent (ms),Diff (ms)\n";
+
+            results.forEach(result => {
+                csvContent += `${result.date},${result.score},${result.medianTimeCongruent},${result.medianTimeIncongruent},${result.difference}\n`;
+            });
+
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "stroop_results.csv");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // Map keys to buttons and start test
+        document.addEventListener('keydown', function(event) {
+            if (event.code === 'Space' && !testActive) {
+                initializeTest();
+            } else if (testActive) {
+                if (event.key === 'r') {
+                    checkAnswer('red');
+                } else if (event.key === 'b') {
+                    checkAnswer('blue');
+                } else if (event.key === 'g') {
+                    checkAnswer('green');
+                } else if (event.key === 'y') {
+                    checkAnswer('yellow');
+                }
+            }
+        });
+
+        // Display results when the page loads
+        window.onload = function() {
+            displayResults();
+        };
+    </script>
+</body>
+</html>
