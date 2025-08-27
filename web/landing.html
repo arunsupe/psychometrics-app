@@ -2,202 +2,223 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Track Your Cognitive Fitness — Psychometrics App</title>
-  <meta name="description" content="Quick, research-inspired tests to track focus, memory, and reaction time. Discover patterns, get insights, and optimize your day. Join the early access list." />
-  <meta name="theme-color" content="#0ea5e9" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Know Your Cognitive Rhythm</title>
+  <meta name="description" content="Your cognitive performance changes hour to hour. Discover your personal pattern and plan your day around your sharpest hours." />
   <style>
-    :root {
-      --bg: #0b1020;
-      --panel: #0f1730;
-      --text: #e8f0ff;
-      --muted: #a7b7d6;
-      --border: #1e2a48;
-      --accent: #38bdf8;
-      --accent2: #22d3ee;
-      --success: #34d399;
-      --danger: #fb7185;
-      --radius: 18px;
-      --shadow: 0 10px 30px rgba(2,8,23,.45);
-    }
-    @media (prefers-color-scheme: light) {
-      :root{
-        --bg:#f8fafc; --panel:#ffffff; --text:#0b1020; --muted:#475569; --border:#e5e7eb; --shadow:0 10px 30px rgba(2,8,23,.08);
-      }
+    :root{
+      --bg:#0b0f14; --card:#111823; --muted:#a9b3c1; --text:#e9eef6; --accent:#5ee1a7; --accent2:#82b1ff; --ring:#203348;
+      --max: 1080px;
     }
     *{box-sizing:border-box}
-    html,body{margin:0;padding:0;font-family:ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial; color:var(--text); background:
-      radial-gradient(900px 500px at 10% 0%, rgba(56,189,248,.08), transparent 40%),
-      radial-gradient(800px 500px at 100% 10%, rgba(34,211,238,.08), transparent 40%),
-      var(--bg);
-    }
-    a{color:var(--accent);text-decoration:none}
+    html,body{margin:0;background:linear-gradient(180deg,#0b0f14 0%,#0b0f14 50%,#0d121a 100%);color:var(--text);font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;line-height:1.5}
+    a{color:var(--accent2);text-decoration:none}
     a:hover{text-decoration:underline}
-    .container{max-width:1100px;margin:0 auto;padding:24px}
-    header{position:sticky;top:0;z-index:30;backdrop-filter:saturate(140%) blur(8px);background:linear-gradient(180deg, rgba(11,16,32,.8), rgba(11,16,32,.35));border-bottom:1px solid var(--border)}
-    .row{display:flex;align-items:center;justify-content:space-between;gap:16px}
-    .brand{display:flex;align-items:center;gap:10px;font-weight:800}
-    .logo{width:28px;height:28px;border-radius:8px;background:conic-gradient(from 0deg, var(--accent), var(--accent2));box-shadow:inset 0 2px 12px rgba(56,189,248,.5), 0 0 18px rgba(34,211,238,.25)}
-    .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:999px;border:1px solid transparent;background:linear-gradient(135deg, var(--accent), var(--accent2));color:#041018;font-weight:800;box-shadow:var(--shadow);cursor:pointer}
-    .btn.ghost{background:transparent;color:var(--text);border-color:var(--border)}
-    .btn:focus{outline:3px solid rgba(34,211,238,.45)}
-    .hero{padding:64px 0 16px;display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center}
-    @media (max-width: 900px){.hero{grid-template-columns:1fr}}
-    h1{font-size:clamp(28px,5vw,52px);line-height:1.06;margin:14px 0}
-    .lead{color:var(--muted);font-size:clamp(16px,2.2vw,19px);max-width:60ch}
-    .panel{background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,0));border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow)}
-    .hero-card{padding:22px}
-    .bullets{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px}
-    @media (max-width:900px){.bullets{grid-template-columns:1fr}}
-    .bullet{padding:14px;border:1px dashed var(--border);border-radius:14px}
-    .section{padding:42px 0}
-    h2{font-size:clamp(22px,3.5vw,34px);margin:0 0 8px}
-    p{line-height:1.6}
-    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    @media (max-width: 1000px){.cards{grid-template-columns:repeat(2,1fr)}}
-    @media (max-width: 640px){.cards{grid-template-columns:1fr}}
-    .card{padding:18px}
-    .muted{color:var(--muted)}
-    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
-    @media (max-width: 900px){.grid-2{grid-template-columns:1fr}}
-    .list{margin:8px 0 0 0;padding:0 0 0 18px}
-    .cta-block{text-align:center;padding:28px}
-    .input{width:100%;padding:14px 16px;border-radius:12px;border:1px solid var(--border);background:var(--panel);color:var(--text)}
-    .form-row{display:flex;gap:12px;align-items:center}
-    @media (max-width:600px){.form-row{flex-direction:column;align-items:stretch}}
-    .fine{font-size:12px;color:var(--muted)}
-    footer{border-top:1px solid var(--border);padding:28px 0;color:var(--muted)}
-    .inline-badge{display:inline-flex;gap:8px;align-items:center;padding:6px 10px;border:1px solid var(--border);border-radius:999px}
-    .kicker{letter-spacing:.2em;text-transform:uppercase;font-size:12px;color:var(--muted)}
-    .chart{width:100%;height:220px;border-radius:12px;background:linear-gradient(180deg, rgba(56,189,248,.06), transparent 60%);border:1px solid var(--border);position:relative;overflow:hidden}
-    .chart svg{position:absolute;inset:0}
-    .success{color:var(--success)}
-    .error{color:var(--danger)}
+    .wrap{max-width:var(--max);margin:0 auto;padding:24px}
+    header.hero{padding:72px 0 32px; text-align:center}
+    .badge{display:inline-flex;gap:8px;align-items:center;border:1px solid var(--ring);padding:6px 10px;border-radius:999px;color:var(--muted);font-size:12px}
+    h1{font-size: clamp(28px, 4vw, 54px);margin:16px 0 12px;letter-spacing:-0.02em}
+    .lead{color:var(--muted);font-size: clamp(15px, 2vw, 20px);max-width:800px;margin:0 auto}
+    .cta{margin-top:24px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap}
+    .btn{border:1px solid transparent;background:var(--accent);color:#09231a;padding:12px 18px;border-radius:12px;font-weight:600;cursor:pointer}
+    .btn.outline{background:transparent;border-color:var(--ring);color:var(--text)}
+    .btn:hover{opacity:.9}
+    .grid{display:grid;gap:16px}
+    .cards{grid-template-columns:repeat(auto-fit,minmax(280px,1fr));margin-top:24px}
+    .card{background:linear-gradient(180deg,var(--card),#0e1621);border:1px solid var(--ring);border-radius:16px;padding:18px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+    .card h3{margin:0 0 8px;font-size:18px}
+    .eyebrow{color:var(--muted);text-transform:uppercase;letter-spacing:.12em;font-size:12px}
+    section{padding:40px 0}
+    .section-title{font-size: clamp(22px, 3vw, 34px); margin:0 0 8px}
+    .section-sub{color:var(--muted);margin:0 0 16px}
+    ul.clean{list-style:none;padding-left:0;margin:0}
+    ul.clean li{margin:10px 0;padding-left:0}
+    .tick{display:inline-block; width:20px;height:20px;border-radius:6px; background:radial-gradient(100% 100% at 20% 20%, #b9ffd6, #1dd67a); margin-right:8px; vertical-align:-4px}
+    .feature{display:flex;gap:14px;align-items:flex-start}
+    .feature .icon{width:12px;height:12px;border:2px solid var(--accent2);border-radius:50%;margin-top:8px}
+    .kicker{color:var(--muted);font-weight:600}
+    .pill{border:1px solid var(--ring);border-radius:999px;padding:6px 10px;color:var(--muted);font-size:12px}
+    .app{display:grid; gap:16px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); margin-top:16px}
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; font-size:12px; color:var(--muted)}
+    footer{border-top:1px solid var(--ring);margin-top:40px;padding:24px 0;color:var(--muted);font-size:13px}
+    .refs{font-size:13px}
+    .callout{border-left:3px solid var(--accent2); padding:10px 14px; background:rgba(130,177,255,.06); border-radius:8px}
+    .hl{background: linear-gradient(90deg, rgba(94,225,167,.35), rgba(130,177,255,.35)); padding:0 .2em; border-radius:.4em}
   </style>
 </head>
 <body>
-  <header>
-    <div class="container row">
-      <div class="brand"><div class="logo" aria-hidden="true"></div> Psychometrics App</div>
-      <nav class="row" aria-label="primary">
-        <a href="#why">Why track?</a>
-        <a href="#how">How it works</a>
-        <a href="#tests">Tests</a>
-        <a href="#join" class="btn">Join the list</a>
-      </nav>
+
+  <header class="hero">
+    <div class="wrap">
+      <span class="badge">Evidence-based • Personal performance</span>
+      <h1>Your brain isn’t constant.<br/>Find your <span class="hl">cognitive rhythm</span>.</h1>
+      <p class="lead">Cognitive performance rises and falls through the day—and it’s different for everyone. Learn your pattern and schedule your toughest work for your sharpest hours.</p>
+      <div class="cta">
+        <a class="btn" href="#app">Try the demo</a>
+        <a class="btn outline" href="#evidence">See the evidence</a>
+      </div>
     </div>
   </header>
 
-  <main>
-    <section class="container hero">
-      <div>
-        <span class="inline-badge" aria-label="Research-inspired">🧠 Research‑inspired</span>
-        <h1>Understand your mind better — track your cognitive fitness over time.</h1>
-        <p class="lead">Short, research‑inspired checks for <strong>focus</strong>, <strong>memory</strong>, and <strong>reaction time</strong>. Learn how sleep, stress, and time of day affect you — then use that insight to plan your day.</p>
-        <div class="bullets">
-          <div class="bullet">📊 <strong>See patterns</strong><br><span class="muted">Trends across days and weeks reveal what boosts or drains performance.</span></div>
-          <div class="bullet">🔎 <strong>Actionable</strong><br><span class="muted">Make data‑backed choices about when to do deep work or rest.</span></div>
-          <div class="bullet">🔒 <strong>Privacy‑first</strong><br><span class="muted">You control your data. Exports and deletion by design.</span></div>
-        </div>
-        <p style="margin-top:18px">
-          <a href="#join" class="btn">Join the Early Access List</a>
-          <a href="#why" class="btn ghost">Learn more</a>
-        </p>
-      </div>
-      <div class="panel hero-card" aria-hidden="true">
-        <h3 class="kicker">Example insight</h3>
-        <h2 style="margin-top:6px">Sleep & Focus Trend</h2>
-        <p class="muted" style="margin-top:2px">Users often see higher focus scores after 7–8 hours of sleep.</p>
-        <div class="chart" role="img" aria-label="Mock chart showing focus scores trending higher with more sleep">
-          <svg viewBox="0 0 600 220" preserveAspectRatio="none">
-            <defs>
-              <linearGradient id="g" x1="0" x2="0" y1="0" y2="1">
-                <stop offset="0%" stop-color="rgba(56,189,248,0.6)"/>
-                <stop offset="100%" stop-color="rgba(56,189,248,0.0)"/>
-              </linearGradient>
-            </defs>
-            <polyline fill="url(#g)" stroke="none" points="0,180 60,172 120,168 180,150 240,138 300,120 360,110 420,98 480,88 540,78 600,70 600,220 0,220"/>
-            <polyline fill="none" stroke="#38bdf8" stroke-width="3" points="0,180 60,172 120,168 180,150 240,138 300,120 360,110 420,98 480,88 540,78 600,70"/>
-          </svg>
-        </div>
+  <main class="wrap">
+
+    <!-- 1. Cognitive Performance Fluctuates -->
+    <section id="evidence">
+      <div class="pill">1 ▸ Cognitive performance fluctuates during the day</div>
+      <h2 class="section-title">Your peaks and dips are real, not a feeling.</h2>
+      <p class="section-sub">Multiple studies show measurable time-of-day swings in reaction time, attention, and alertness.</p>
+
+      <div class="grid cards">
+        <article class="card">
+          <h3>Reaction speed & attention vary by clock time</h3>
+          <p>Empirical work shows sizable time-of-day effects on reaction time and attention across tasks, with performance windows that aren’t uniform over the day. <span class="mono">[S1]</span></p>
+        </article>
+        <article class="card">
+          <h3>Task “best time” differs by function</h3>
+          <p>Some cognitive functions hit optimal performance at different times (e.g., vigilance vs. working memory), reinforcing that “one best time” doesn’t exist. <span class="mono">[S2]</span></p>
+        </article>
+        <article class="card">
+          <h3>Sleep & circadian debt compound the dip</h3>
+          <p>Large real-world telemetry (keystrokes/clicks) links performance to circadian phase and prior sleep; deficits can persist for days after sleep loss. <span class="mono">[S3]</span></p>
+        </article>
       </div>
     </section>
 
-    <section id="why" class="section">
-      <div class="container grid-2">
-        <div>
-          <h2>Why track cognitive performance?</h2>
-          <p>Cognitive performance shifts with <strong>sleep</strong>, <strong>stress</strong>, <strong>nutrition</strong>, and <strong>time of day</strong>. By running quick checks and logging lightweight context, you can discover when you’re sharpest and structure your day around it.</p>
-          <div class="cards">
-            <div class="panel card"><strong>Find your peak hours</strong><br><span class="muted">Spot the windows where deep work feels effortless.</span></div>
-            <div class="panel card"><strong>Reduce guesswork</strong><br><span class="muted">Replace hunches with trends you can see.</span></div>
-            <div class="panel card"><strong>Build better habits</strong><br><span class="muted">Use feedback loops to improve sleep and focus.</span></div>
+    <!-- 2. Different People, Different Rhythms -->
+    <section>
+      <div class="pill">2 ▸ People have different daily cognitive rhythms</div>
+      <h2 class="section-title">Chronotype matters—“larks” and “owls” peak at different times.</h2>
+      <p class="section-sub">Your internal clock shifts when you’re naturally sharp. For late chronotypes, mornings can be objectively worse—unless you adapt your routine.</p>
+
+      <div class="grid cards">
+        <article class="card">
+          <h3>Chronotype shifts peak performance</h3>
+          <p>Late chronotypes underperform in morning cognitive and physical measures vs. early types; timing tasks to chronotype improves outcomes. <span class="mono">[S4]</span></p>
+        </article>
+        <article class="card">
+          <h3>Schedules that fit the clock</h3>
+          <p>Academic performance and alertness improve when start times align better with biological preference, especially for adolescents and young adults. <span class="mono">[S5]</span></p>
+        </article>
+        <article class="card">
+          <h3>Mitigations can help</h3>
+          <p>For late types, brief morning exercise can blunt early-day reaction-time deficits—practical when schedules can’t move. <span class="mono">[S6]</span></p>
+        </article>
+      </div>
+    </section>
+
+    <!-- 3. Why Knowing Your Pattern Helps -->
+    <section>
+      <div class="pill">3 ▸ Why understanding your own pattern is useful</div>
+      <h2 class="section-title">Turn insight into output.</h2>
+      <p class="section-sub">Mapping your rhythm lets you place the right work at the right time—and protect recovery when your brain is off-peak.</p>
+
+      <div class="grid">
+        <div class="card">
+          <div class="feature">
+            <span class="icon"></span>
+            <div>
+              <h3 class="kicker">Time critical work to your “prime hours”</h3>
+              <p>Use objective tasks (e.g., vigilance and interference-control probes) to find when you’re sharpest; schedule deep work there. <span class="mono">[S3]</span></p>
+            </div>
+          </div>
+          <div class="feature">
+            <span class="icon"></span>
+            <div>
+              <h3 class="kicker">Design guardrails for low-tide periods</h3>
+              <p>Batch admin and habits (walks, light inbox) during predictable dips. If you can’t move the meeting, apply quick mitigations (brief movement, light exposure). <span class="mono">[S6]</span></p>
+            </div>
+          </div>
+          <div class="feature">
+            <span class="icon"></span>
+            <div>
+              <h3 class="kicker">Recover smarter after poor sleep</h3>
+              <p>When sleep debt is real, expect slower reaction and more errors—adjust expectations and task selection accordingly. <span class="mono">[S3]</span></p>
+            </div>
           </div>
         </div>
-        <div class="panel card">
-          <h3 class="kicker">What you’ll measure</h3>
-          <ul class="list">
-            <li><strong>Reaction Time</strong> (Psychomotor Vigilance Task)</li>
-            <li><strong>Working Memory</strong> (Digit Span)</li>
-            <li><strong>Selective Attention</strong> (Stroop)</li>
-            <li><strong>Cognitive Flexibility</strong> (Trail Making)</li>
+      </div>
+
+      <div class="callout" style="margin-top:16px">
+        <strong>Bottom line:</strong> your cognitive rhythm is measurable and actionable. A small amount of tracking yields outsized planning benefits.
+      </div>
+    </section>
+
+    <!-- App Intro -->
+    <section id="app">
+      <div class="pill">Meet the app</div>
+      <h2 class="section-title">Discover your personal cognitive rhythm—fast.</h2>
+      <p class="section-sub">Short, scientifically grounded micro-tests map your peaks and dips in minutes per day. Your data stays private by default.</p>
+
+      <div class="app">
+        <div class="card">
+          <h3><span class="tick"></span> Psychomotor Vigilance Task (PVT)</h3>
+          <p>Measures sustained attention and reaction time—highly sensitive to sleep and circadian factors.</p>
+        </div>
+        <div class="card">
+          <h3><span class="tick"></span> Digit Span</h3>
+          <p>Assesses short-term/working memory. Spot when memory span is longest during your day.</p>
+        </div>
+        <div class="card">
+          <h3><span class="tick"></span> Stroop</h3>
+          <p>Indexes interference control (inhibitory function). Identify hours with strongest executive control.</p>
+        </div>
+        <div class="card">
+          <h3><span class="tick"></span> Trail Making</h3>
+          <p>Captures processing speed and task-switching fluency to round out your profile.</p>
+        </div>
+      </div>
+
+      <div class="grid" style="margin-top:16px">
+        <div class="card">
+          <h3>What you get</h3>
+          <ul class="clean">
+            <li>• A daily <strong>Peak/Dip map</strong> tailored to you</li>
+            <li>• <strong>Task-timing suggestions</strong> for deep work vs. admin</li>
+            <li>• <strong>Sleep-aware alerts</strong> when your scores suggest caution</li>
+            <li>• Private by default; exportable CSV/JSON</li>
           </ul>
-        </div>
-      </div>
-    </section>
-
-    <section id="how" class="section" aria-labelledby="how-title">
-      <div class="container">
-        <h2 id="how-title">How it works</h2>
-        <div class="grid-2">
-          <div class="panel card">
-            <ol class="list">
-              <li><strong>Take quick checks</strong> — 30–90 seconds per test.</li>
-              <li><strong>Optionally add context</strong> — sleep hours, caffeine, time of day.</li>
-              <li><strong>See trends</strong> — compare results vs. your context.</li>
-            </ol>
-          </div>
-          <div class="panel card">
-            <h3 class="kicker">Privacy & Data</h3>
-            <ul class="list">
-              <li>🔒 Local‑first philosophy</li>
-              <li>🗑️ One‑click data deletion</li>
-              <li>📤 Portable exports (CSV/JSON)</li>
-            </ul>
+          <div class="cta" style="justify-content:flex-start;margin-top:12px">
+            <a class="btn" href="#get-started">Start free</a>
+            <a class="btn outline" href="#refs">Read the research</a>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="join" class="section">
-      <div class="container panel cta-block">
-        <h2>Join the early access list</h2>
-        <p class="muted">Get updates, early invites, and sample insights. No spam — unsubscribe anytime.</p>
-        <form id="signup" class="container" style="max-width:720px" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-          <div class="form-row">
-            <input class="input" type="text" name="name" placeholder="Your name (optional)" autocomplete="name" />
-            <input class="input" type="email" name="email" placeholder="you@example.com" required autocomplete="email" />
-            <button class="btn" type="submit">Join the list</button>
-          </div>
-          <p class="fine">We’ll only use your email to send updates about this project.</p>
-        </form>
-      </div>
+    <!-- References -->
+    <section id="refs">
+      <div class="pill">Selected sources</div>
+      <h2 class="section-title">Research, at a glance</h2>
+      <ol class="refs">
+        <li id="S1">[S1] Time-of-day effects on cognitive performance (overview/examples). <a href="https://www.sciencedirect.com/science/article/abs/pii/S0166432819307417" target="_blank" rel="noopener">Neuroscience Letters (2019)</a>.</li>
+        <li id="S2">[S2] Different cognitive functions show different optimal times. <a href="https://www.sciencedirect.com/science/article/abs/pii/S0166432819307417" target="_blank" rel="noopener">Neuroscience Letters (2019)</a>.</li>
+        <li id="S3">[S3] Large-scale telemetry links performance to circadian phase & prior sleep. <a href="https://arxiv.org/abs/1701.07083" target="_blank" rel="noopener">Wang et al., arXiv (2017)</a>.</li>
+        <li id="S4">[S4] Chronotype shifts peak performance; late types underperform in mornings. <a href="https://sportsmedicine-open.springeropen.com/articles/10.1186/s40798-018-0162-z" target="_blank" rel="noopener">Facer-Childs et al., Sports Med-Open (2018)</a>.</li>
+        <li id="S5">[S5] Aligning schedules with chronotype improves outcomes in education. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5395635/" target="_blank" rel="noopener">Kelley & Evans, Frontiers in Human Neuroscience (2017)</a>.</li>
+        <li id="S6">[S6] Morning exercise mitigates early reaction-time deficits in late chronotypes. <a href="https://www.mdpi.com/2624-5175/7/1/7" target="_blank" rel="noopener">MDPI, 2025</a>.</li>
+      </ol>
+      <p class="mono">Tip: you can hide or shorten the references on production; we left them visible for credibility during early launches.</p>
     </section>
+
   </main>
 
-  <footer id="privacy">
-    <div class="container row" style="justify-content:space-between;align-items:flex-start;gap:12px">
-      <div>
-        <div class="brand"><div class="logo" aria-hidden="true"></div> Psychometrics App</div>
-        <p class="fine">© <span id="y"></span> Psychometrics App • Built with a privacy‑first mindset.</p>
-      </div>
-      <div class="fine">Contact: <a href="mailto:hello@example.com">hello@example.com</a></div>
+  <footer>
+    <div class="wrap">
+      <div>© <span id="y"></span> Cognitive Rhythm Lab</div>
     </div>
   </footer>
 
   <script>
+    // Smooth anchor scroll (no external deps)
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const id=a.getAttribute('href').slice(1);
+        const el=document.getElementById(id);
+        if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth', block:'start'}); }
+      });
+    });
+    // Year
     document.getElementById('y').textContent = new Date().getFullYear();
   </script>
-  <style>.visually-hidden {position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap}</style>
 </body>
 </html>
