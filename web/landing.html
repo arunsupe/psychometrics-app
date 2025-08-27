@@ -3,57 +3,64 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Know Your Cognitive Rhythm</title>
+  <title>Know Your Cognitive Rhythm — Coming Soon</title>
+  <meta name="description" content="Cognitive Rhythm Lab — quick, research‑inspired tests to map your daily focus, memory, and alertness. Join the early list to get notified." />
+  <meta name="theme-color" content="#6ee7b7" />
   <style>
-    :root{--bg:#0b0f14;--card:#111823;--muted:#a9b3c1;--text:#e9eef6;--accent:#5ee1a7;--accent2:#82b1ff;--ring:#203348;--max:1080px;}
-    *{box-sizing:border-box}body{margin:0;background:#0b0f14;color:var(--text);font-family:system-ui,Arial,sans-serif;line-height:1.5}
-    a{color:var(--accent2)}.wrap{max-width:var(--max);margin:0 auto;padding:24px}
-    header{text-align:center;padding:72px 0 32px}
-    h1{font-size:clamp(28px,4vw,54px);margin:16px 0}
-    .hl {
-  background: linear-gradient(90deg, rgba(94,225,167,.35), rgba(130,177,255,.35));
-  padding: 0 .2em;
-  border-radius: .4em;
-}
-    .lead{color:var(--muted);font-size:18px;max-width:700px;margin:0 auto}
-    .cta{margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-    .btn{border:none;background:var(--accent);color:#09231a;padding:12px 18px;border-radius:12px;font-weight:600;cursor:pointer}
-    .btn.outline{background:transparent;border:1px solid var(--ring);color:var(--text)}
-    section{padding:40px 0}.pill{border:1px solid var(--ring);border-radius:999px;padding:6px 10px;color:var(--muted);font-size:12px}
-    .section-title{font-size:24px;margin:12px 0}.section-sub{color:var(--muted);margin-bottom:16px}
+    :root{--bg:#f8fafc;--ink:#0f172a;--muted:#475569;--card:#ffffff;--ring:#e2e8f0;--accent:#10b981;--accent2:#6366f1;--accent3:#f59e0b;--max:1080px;--radius:16px;--shadow:0 10px 30px rgba(2,8,23,.08)}
+    @media (prefers-color-scheme: dark){:root{--bg:#0b111f;--ink:#e5ecff;--muted:#9fb1d1;--card:#0f172a;--ring:#1f2a44;--shadow:0 10px 30px rgba(2,8,23,.4)}}
+    *{box-sizing:border-box}
+    body{margin:0;background:radial-gradient(1200px 600px at -20% -10%, rgba(99,102,241,.12), transparent 40%),radial-gradient(900px 520px at 120% -10%, rgba(16,185,129,.12), transparent 45%),linear-gradient(180deg, rgba(245,249,255,.9), var(--bg) 22%);color:var(--ink);font-family:system-ui,Segoe UI,Roboto,Inter,Arial,sans-serif;line-height:1.55}
+    a{color:var(--accent2);text-decoration:none}a:hover{text-decoration:underline}
+    .wrap{max-width:var(--max);margin:0 auto;padding:24px}
+    header{text-align:center;padding:56px 0 28px}
+    h1{font-size:clamp(30px,5vw,60px);margin:12px 0}
+    .hl{background:linear-gradient(90deg, rgba(16,185,129,.25), rgba(99,102,241,.25), rgba(245,158,11,.25));padding:.1em .35em;border-radius:.5em}
+    .lead{color:var(--muted);font-size:18px;max-width:760px;margin:0 auto}
+    .cta{margin-top:18px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+    .btn{border:1px solid transparent;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#071a13;padding:10px 16px;border-radius:10px;font-weight:700;cursor:pointer;box-shadow:var(--shadow)}
+    .btn.ghost{background:#fff;color:var(--ink);border-color:var(--ring)}
+    section{padding:40px 0}
+    .pill{display:inline-block;border:1px solid var(--ring);border-radius:999px;padding:6px 10px;color:var(--muted);font-size:12px}
+    .section-title{font-size:26px;margin:12px 0}
+    .section-sub{color:var(--muted);margin-bottom:16px}
     .cards{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
-    .card{background:var(--card);border:1px solid var(--ring);border-radius:12px;padding:16px}
+    .card{background:var(--card);border:1px solid var(--ring);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+    .panel{background:var(--card);border:1px solid var(--ring);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+    .input{width:100%;padding:14px 16px;border-radius:12px;border:1px solid var(--ring);background:#fff;color:#0b1220}
+    .form-row{display:flex;gap:12px;align-items:center}
+    @media (max-width:640px){.form-row{flex-direction:column;align-items:stretch}}
+    .fine{font-size:12px;color:var(--muted)}
     footer{border-top:1px solid var(--ring);margin-top:40px;padding:20px 0;color:var(--muted);font-size:13px;text-align:center}
   </style>
 </head>
 <body>
   <header>
     <div class="wrap">
-      <h1>Find Your <span class="hl">Cognitive Rhythm</span></h1>
-      <p class="lead">Your brain isn’t steady all day. Track when you’re sharpest and plan work around it.</p>
+      <h1><span class="hl">Know Your Cognitive Rhythm</span></h1>
+      <p class="lead">Short, science‑inspired checks map when you’re sharpest so you can plan deep work at the right time. <a href="#join">Join the early list</a> to get notified when we launch.</p>
       <div class="cta">
-        <a class="btn" href="#app">Try the Demo</a>
-        <a class="btn outline" href="#evidence">See the Evidence</a>
+        <a class="btn" href="#evidence">Why it matters</a>
+        <a class="btn ghost" href="#app">What you'll get</a>
       </div>
     </div>
   </header>
 
   <main class="wrap">
-    <!-- 1 -->
+    <!-- Explanations / Product Sections come first -->
     <section id="evidence">
-      <div class="pill">1 ▸ Daily fluctuations</div>
-      <h2 class="section-title">Performance changes hour to hour</h2>
-      <p class="section-sub">Reaction speed, focus, and alertness rise and fall through the day.</p>
+      <div class="pill">Why track it?</div>
+      <h2 class="section-title">Performance changes across the day</h2>
+      <p class="section-sub">Sleep, stress, and time of day shift reaction speed, memory, and attention.</p>
       <div class="cards">
-        <div class="card"><h3>Reaction speed</h3><p>Can shift 10–30% depending on time of day. <span>[S1]</span></p></div>
+        <div class="card"><h3>Reaction speed</h3><p>Can vary 10–30% by time of day. <span>[S1]</span></p></div>
         <div class="card"><h3>Different peaks</h3><p>Memory, attention, and vigilance peak at different times. <span>[S2]</span></p></div>
-        <div class="card"><h3>Sleep debt</h3><p>Lack of sleep worsens dips and slows recovery. <span>[S3]</span></p></div>
+        <div class="card"><h3>Sleep debt</h3><p>Insufficient sleep amplifies dips. <span>[S3]</span></p></div>
       </div>
     </section>
 
-    <!-- 2 -->
     <section>
-      <div class="pill">2 ▸ Different rhythms</div>
+      <div class="pill">Different rhythms</div>
       <h2 class="section-title">Not everyone peaks at the same time</h2>
       <p class="section-sub">Chronotype shapes when you do your best work.</p>
       <div class="cards">
@@ -63,9 +70,8 @@
       </div>
     </section>
 
-    <!-- 3 -->
     <section>
-      <div class="pill">3 ▸ Why track it</div>
+      <div class="pill">Why track</div>
       <h2 class="section-title">Turn insight into better timing</h2>
       <p class="section-sub">Knowing your rhythm helps you match tasks to your state.</p>
       <div class="cards">
@@ -75,7 +81,6 @@
       </div>
     </section>
 
-    <!-- App -->
     <section id="app">
       <div class="pill">Meet the App</div>
       <h2 class="section-title">Discover your rhythm in minutes</h2>
@@ -86,19 +91,28 @@
         <div class="card"><h3>Stroop</h3><p>Tests focus & control.</p></div>
         <div class="card"><h3>Trail Making</h3><p>Checks processing speed.</p></div>
       </div>
-      <div class="cta" style="margin-top:20px">
-        <a class="btn" href="#get-started">Start Free</a>
-      </div>
     </section>
 
-    <!-- References -->
+    <!-- Signup moved to the bottom -->
+    <section id="join" class="panel">
+      <div class="pill">Coming Soon</div>
+      <h2 class="section-title">Be first to try it</h2>
+      <p class="section-sub">Join the early list — we’ll only use your email to send launch updates. No spam.</p>
+      <form action="https://formspree.io/f/mgvlvakg" method="POST">
+        <div class="form-row">
+          <input class="input" type="email" name="email" placeholder="you@example.com" required>
+          <button class="btn" type="submit">Notify me</button>
+        </div>
+      </form>
+    </section>
+
     <section id="refs">
       <div class="pill">Sources</div>
       <ol>
-        <li>[S1] Time-of-day effects on reaction/attention. <a href="https://link.springer.com/article/10.1007/s11325-023-02895-0">Springer, 2023</a></li>
+        <li>[S1] Time‑of‑day effects on reaction/attention. <a href="https://link.springer.com/article/10.1007/s11325-023-02895-0">Springer, 2023</a></li>
         <li>[S2] Cognitive functions peak at different times. <a href="https://www.sciencedirect.com/science/article/abs/pii/S0166432819307417">Neurosci Lett, 2019</a></li>
         <li>[S3] Circadian phase & sleep debt impact performance. <a href="https://arxiv.org/abs/1701.07083">Wang et al., 2017</a></li>
-        <li>[S4] Chronotype shifts peak ability. <a href="https://sportsmedicine-open.springeropen.com/articles/10.1186/s40798-018-0162-z">Sports Med-Open, 2018</a></li>
+        <li>[S4] Chronotype shifts peak ability. <a href="https://sportsmedicine-open.springeropen.com/articles/10.1186/s40798-018-0162-z">Sports Med‑Open, 2018</a></li>
         <li>[S5] Later starts improve learning. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5395635/">Front Hum Neurosci, 2017</a></li>
         <li>[S6] Exercise helps late types. <a href="https://www.mdpi.com/2624-5175/7/1/7">MDPI, 2025</a></li>
       </ol>
@@ -106,6 +120,8 @@
   </main>
 
   <footer>© <span id="y"></span> Cognitive Rhythm Lab</footer>
-  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+  <script>
+    document.getElementById('y').textContent=new Date().getFullYear();
+  </script>
 </body>
 </html>
