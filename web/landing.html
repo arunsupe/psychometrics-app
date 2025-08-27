@@ -10,6 +10,11 @@
     a{color:var(--accent2)}.wrap{max-width:var(--max);margin:0 auto;padding:24px}
     header{text-align:center;padding:72px 0 32px}
     h1{font-size:clamp(28px,4vw,54px);margin:16px 0}
+    .hl {
+  background: linear-gradient(90deg, rgba(94,225,167,.35), rgba(130,177,255,.35));
+  padding: 0 .2em;
+  border-radius: .4em;
+}
     .lead{color:var(--muted);font-size:18px;max-width:700px;margin:0 auto}
     .cta{margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
     .btn{border:none;background:var(--accent);color:#09231a;padding:12px 18px;border-radius:12px;font-weight:600;cursor:pointer}
@@ -24,7 +29,7 @@
 <body>
   <header>
     <div class="wrap">
-      <h1>Find Your Cognitive Rhythm</h1>
+      <h1>Find Your <span class="hl">Cognitive Rhythm</span></h1>
       <p class="lead">Your brain isn’t steady all day. Track when you’re sharpest and plan work around it.</p>
       <div class="cta">
         <a class="btn" href="#app">Try the Demo</a>
