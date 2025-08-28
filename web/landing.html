@@ -3,144 +3,179 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Know Your Cognitive Rhythm — Coming Soon</title>
-  <meta name="description" content="Cognitive Rhythm Lab — quick, research‑inspired tests to map your daily focus, memory, and alertness. Join the early list to get notified." />
-  <meta name="theme-color" content="#6ee7b7" />
+  <title>MindArc — Track Your Cognitive Best</title>
+  <meta name="color-scheme" content="light">
   <style>
-    :root {
-      --bg:#f8fafc; --ink:#0f172a; --muted:#475569; --card:#ffffff; --ring:#e2e8f0;
-      --accent:#10b981; --accent2:#6366f1; --accent3:#f59e0b;
-      --max:1080px; --radius:16px; --shadow:0 6px 20px rgba(2,8,23,.08);
+    :root{
+      --bg1:#f8fbff;
+      --bg2:#fff7fb;
+      --text:#0b1220;
+      --muted:#495266;
+      --accent:#5b8cff;   /* blue */
+      --accent2:#7ee787;  /* green */
+      --accent3:#ff7cc8;  /* pink */
+      --card:#ffffffcc;
+      --ring:#d8e1ff;
+      --shadow: 0 20px 60px rgba(28,42,71,.18);
+      --radius: 18px;
+      --max: 880px;
     }
-    @media (prefers-color-scheme: dark) {
-      :root {--bg:#0b111f; --ink:#e5ecff; --muted:#9fb1d1; --card:#0f172a; --ring:#1f2a44; --shadow:0 6px 20px rgba(2,8,23,.4)}
+
+    /* Page base */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:Inter, ui-sans-serif, system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      color:var(--text); line-height:1.55;
+      background:
+        radial-gradient(1200px 800px at 10% -10%, rgba(123,97,255,.20), transparent 60%),
+        radial-gradient(1000px 700px at 100% 0%, rgba(255,124,200,.20), transparent 55%),
+        radial-gradient(900px 600px at 0% 100%, rgba(126,231,135,.18), transparent 55%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
     }
-    * { box-sizing:border-box; }
-    body {
-      margin:0;
-      background:linear-gradient(180deg,#ffffff 0%,var(--bg) 100%);
-      color:var(--ink);
-      font-family:system-ui,Segoe UI,Roboto,Inter,Arial,sans-serif;
-      line-height:1.6;
+
+    /* Header lockup */
+    .wrap{max-width:var(--max); margin:0 auto; padding:32px 20px 64px}
+    .brand{
+      display:inline-flex; align-items:center; gap:10px;
+      background:linear-gradient(90deg, var(--accent), var(--accent3), var(--accent2));
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+      font-weight:800; letter-spacing:.2px; font-size:14px; text-transform:uppercase;
     }
-    a { color:var(--accent2); text-decoration:none; }
-    a:hover { text-decoration:underline; }
-    .wrap { max-width:var(--max); margin:0 auto; padding:24px; }
-    header { text-align:center; padding:60px 0 32px; }
-    h1 { font-size:clamp(30px,5vw,56px); line-height:1.1; margin:12px 0; }
-    .hl {
-      background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent3));
+    .badge{display:inline-flex; align-items:center; gap:6px; color:#1a2540; font-size:12px; background:#ffffffcf; padding:6px 10px; border:1px solid var(--ring); border-radius:999px; backdrop-filter: blur(6px)}
+
+    /* Hero */
+    .card{
+      margin:22px auto 0;
+      background:var(--card); border:1px solid var(--ring); border-radius:var(--radius);
+      box-shadow:var(--shadow); backdrop-filter: blur(10px);
+      padding:34px 28px;
+      text-align:center;
+    }
+    h1{
+      font-size: clamp(30px, 5vw, 46px);
+      margin: 8px 0 14px;
+      line-height:1.15;
+    }
+    .hl{
+      background: linear-gradient(90deg, var(--accent), var(--accent3), var(--accent2));
       -webkit-background-clip:text; background-clip:text; color:transparent;
     }
-    .lead { color:var(--muted); font-size:18px; max-width:760px; margin:0 auto; }
-    .cta { margin-top:20px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
-    .btn {
-      border:1px solid transparent; background:linear-gradient(135deg,var(--accent),var(--accent2));
-      color:#fff; padding:10px 18px; border-radius:10px; font-weight:700;
-      cursor:pointer; box-shadow:var(--shadow);
+    p.lead{
+      margin:0 auto 12px; max-width: 50ch; color:var(--muted); font-size: clamp(16px, 2.2vw, 18px);
     }
-    .btn.ghost { background:#fff; color:var(--ink); border:1px solid var(--ring); }
-    section { padding:40px 0; }
-    .pill { display:inline-block; border:1px solid var(--ring); border-radius:999px; padding:6px 10px; color:var(--muted); font-size:12px; }
-    .section-title { font-size:26px; margin:12px 0; }
-    .section-sub { color:var(--muted); margin-bottom:16px; }
-    .cards { display:grid; gap:16px; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); }
-    .card { background:var(--card); border:1px solid var(--ring); border-radius:var(--radius); padding:18px; box-shadow:var(--shadow); }
-    .panel { background:var(--card); border:1px solid var(--ring); border-radius:var(--radius); padding:20px; box-shadow:var(--shadow); }
-    .input { width:100%; padding:14px 16px; border-radius:12px; border:1px solid var(--ring); background:#fff; color:#0b1220; }
-    .form-row { display:flex; gap:12px; align-items:center; }
-    @media (max-width:640px) { .form-row { flex-direction:column; align-items:stretch; } }
-    .fine { font-size:12px; color:var(--muted); }
-    footer { border-top:1px solid var(--ring); margin-top:40px; padding:20px 0; color:var(--muted); font-size:13px; text-align:center; }
-    html { scroll-behavior:smooth; }
+
+    /* Form */
+    form{margin-top:18px}
+    .form-row{display:flex; justify-content:center; gap:10px; flex-wrap:wrap}
+    .input{
+      background:#fff; color:#0b1220;
+      border:1px solid var(--ring); outline:none;
+      padding:12px 14px; min-width:260px; border-radius:12px; font-size:16px;
+      box-shadow: inset 0 1px 0 rgba(10,20,60,.04);
+    }
+    .input:focus{border-color:#b8c6ff; box-shadow:0 0 0 4px rgba(184,198,255,.35)}
+    .btn{
+      position:relative; border:none; cursor:pointer; font-weight:700; font-size:16px;
+      padding:12px 18px; border-radius:12px; color:#071220;
+      background: linear-gradient(90deg, var(--accent), var(--accent3));
+      box-shadow: 0 10px 24px rgba(91,140,255,.28);
+      transition: transform .08s ease, box-shadow .2s ease;
+    }
+    .btn:hover{ transform: translateY(-1px); box-shadow:0 14px 28px rgba(91,140,255,.35)}
+    .btn:active{ transform: translateY(0)}
+    .subcopy{font-size:13px; color:#5a6276; margin-top:8px}
+
+    /* Little icon row */
+    .chips{display:flex; gap:8px; justify-content:center; margin:14px 0 6px; flex-wrap:wrap}
+    .chip{
+      display:inline-flex; gap:8px; align-items:center; padding:6px 10px; border-radius:999px;
+      background:#fff; border:1px solid var(--ring); color:#1a2540; font-size:12px;
+    }
+    .dot{width:8px; height:8px; border-radius:50%}
+
+    /* Success / error */
+    .notice{margin-top:12px; font-size:14px; display:none}
+    .notice.ok{color:#0b5f2a}
+    .notice.err{color:#7a0f2e}
+
+    /* Footer */
+    footer{padding:36px 0 18px; text-align:center; color:#4b556a; font-size:13px}
+
+    /* Motion respect */
+    @media (prefers-reduced-motion: reduce){
+      .btn{transition:none}
+    }
   </style>
 </head>
 <body>
-  <header>
-    <div class="wrap">
-      <h1><span class="hl">Know Your Cognitive Rhythm</span></h1>
-      <p class="lead">Short, science‑inspired checks map when you’re sharpest so you can plan deep work at the right time. <a href="#join">Join the early list</a> to get notified when we launch.</p>
-      <div class="cta">
-        <a class="btn" href="#evidence">Why it matters</a>
-        <a class="btn ghost" href="#app">What you'll get</a>
-      </div>
+
+  <div class="wrap">
+    <div class="badge" aria-label="Coming Soon">
+      <span class="brand">MindArc</span> Coming Soon
     </div>
-  </header>
 
-  <main class="wrap">
-    <section id="evidence">
-      <div class="pill">Why track it?</div>
-      <h2 class="section-title">Performance changes across the day</h2>
-      <p class="section-sub">Sleep, stress, and time of day shift reaction speed, memory, and attention.</p>
-      <div class="cards">
-        <div class="card"><h3>Reaction speed</h3><p>Can vary 10–30% by time of day. <span>[S1]</span></p></div>
-        <div class="card"><h3>Different peaks</h3><p>Memory, attention, and vigilance peak at different times. <span>[S2]</span></p></div>
-        <div class="card"><h3>Sleep debt</h3><p>Insufficient sleep amplifies dips. <span>[S3]</span></p></div>
+    <div class="card" role="region" aria-label="MindArc signup">
+      <h1>Are you at your <span class="hl">cognitive best</span>?</h1>
+
+      <p class="lead">Just like fitness devices track physical performance, <strong>MindArc</strong> uses short neuropsychological tests to measure your brain’s optimal state in minutes.</p>
+      <p class="lead">Track your cognitive performance over time to spot patterns and learn what helps you reach your peak—so you can optimize your time to top mental performance.</p>
+
+      <div class="chips" aria-hidden="true">
+        <span class="chip"><span class="dot" style="background:var(--accent)"></span> Micro-tests</span>
+        <span class="chip"><span class="dot" style="background:var(--accent3)"></span> Daily snapshots</span>
+        <span class="chip"><span class="dot" style="background:var(--accent2)"></span> Private by default</span>
       </div>
-    </section>
 
-    <section>
-      <div class="pill">Different rhythms</div>
-      <h2 class="section-title">Not everyone peaks at the same time</h2>
-      <p class="section-sub">Chronotype shapes when you do your best work.</p>
-      <div class="cards">
-        <div class="card"><h3>Chronotypes</h3><p>“Larks” thrive early, “owls” later. <span>[S4]</span></p></div>
-        <div class="card"><h3>Fit matters</h3><p>School and work align better with later starts. <span>[S5]</span></p></div>
-        <div class="card"><h3>Quick fixes</h3><p>Morning exercise can help night owls adapt. <span>[S6]</span></p></div>
-      </div>
-    </section>
+      <p style="margin-top:6px"><strong>👉 Be first to try — sign up for launch.</strong></p>
 
-    <section>
-      <div class="pill">Why track</div>
-      <h2 class="section-title">Turn insight into better timing</h2>
-      <p class="section-sub">Knowing your rhythm helps you match tasks to your state.</p>
-      <div class="cards">
-        <div class="card"><h3>Use prime hours</h3><p>Do deep work when scores are highest. <span>[S3]</span></p></div>
-        <div class="card"><h3>Protect dips</h3><p>Batch light tasks when energy is low. <span>[S6]</span></p></div>
-        <div class="card"><h3>Adjust after poor sleep</h3><p>Expect slower reaction, plan accordingly. <span>[S3]</span></p></div>
-      </div>
-    </section>
-
-    <section id="app">
-      <div class="pill">Meet the App</div>
-      <h2 class="section-title">Discover your rhythm in minutes</h2>
-      <p class="section-sub">Quick tests show when your brain is at its best. Data stays private.</p>
-      <div class="cards">
-        <div class="card"><h3>PVT</h3><p>Tracks attention & reaction time.</p></div>
-        <div class="card"><h3>Digit Span</h3><p>Measures working memory.</p></div>
-        <div class="card"><h3>Stroop</h3><p>Tests focus & control.</p></div>
-        <div class="card"><h3>Trail Making</h3><p>Checks processing speed.</p></div>
-      </div>
-    </section>
-
-    <section id="join" class="panel">
-      <div class="pill">Coming Soon</div>
-      <h2 class="section-title">Be first to try it</h2>
-      <p class="section-sub">Join the early list — we’ll only use your email to send launch updates. No spam.</p>
-      <form action="https://formspree.io/f/mgvlvakg" method="POST">
+      <!-- Email capture (Formspree) -->
+      <form id="mindarc-form" action="https://formspree.io/f/mgvlvakg" method="POST">
         <div class="form-row">
-          <input class="input" type="email" name="email" placeholder="you@example.com" required>
+          <input class="input" type="email" name="email" placeholder="you@example.com" required="">
           <button class="btn" type="submit">Notify me</button>
         </div>
+        <div class="subcopy">No spam. Unsubscribe anytime.</div>
+        <div id="ok" class="notice ok">Thanks — you’re on the list! 🎉</div>
+        <div id="err" class="notice err">Hmm, something went wrong. Please try again.</div>
       </form>
-    </section>
+    </div>
 
-    <section id="refs">
-      <div class="pill">Sources</div>
-      <ol>
-        <li>[S1] Time‑of‑day effects on reaction/attention. <a href="https://link.springer.com/article/10.1007/s11325-023-02895-0">Springer, 2023</a></li>
-        <li>[S2] Cognitive functions peak at different times. <a href="https://www.sciencedirect.com/science/article/abs/pii/S0166432819307417">Neurosci Lett, 2019</a></li>
-        <li>[S3] Circadian phase & sleep debt impact performance. <a href="https://arxiv.org/abs/1701.07083">Wang et al., 2017</a></li>
-        <li>[S4] Chronotype shifts peak ability. <a href="https://sportsmedicine-open.springeropen.com/articles/10.1186/s40798-018-0162-z">Sports Med‑Open, 2018</a></li>
-        <li>[S5] Later starts improve learning. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5395635/">Front Hum Neurosci, 2017</a></li>
-        <li>[S6] Exercise helps late types. <a href="https://www.mdpi.com/2624-5175/7/1/7">MDPI, 2025</a></li>
-      </ol>
-    </section>
-  </main>
+    <footer>© <span id="y"></span> MindArc</footer>
+  </div>
 
-  <footer>© <span id="y"></span> Cognitive Rhythm Lab</footer>
   <script>
-    document.getElementById('y').textContent=new Date().getFullYear();
+    // Year
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Progressive enhancement: stay on page & show a message
+    (function(){
+      const form = document.getElementById('mindarc-form');
+      if(!form) return;
+      const ok  = document.getElementById('ok');
+      const err = document.getElementById('err');
+
+      form.addEventListener('submit', async (e) => {
+        // Keep native submit for users without fetch support
+        if (!window.fetch) return;
+        e.preventDefault();
+        ok.style.display = 'none';
+        err.style.display = 'none';
+
+        const data = new FormData(form);
+        try{
+          const res = await fetch(form.action, { method:'POST', body:data, headers: { 'Accept': 'application/json' }});
+          if(res.ok){
+            ok.style.display = 'block';
+            form.reset();
+          } else {
+            err.style.display = 'block';
+          }
+        }catch(_){
+          err.style.display = 'block';
+        }
+      });
+    })();
   </script>
 </body>
 </html>
